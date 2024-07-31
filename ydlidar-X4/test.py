@@ -5,11 +5,15 @@ import datetime # Time module
 #In linux type in terminal -- ls /dev/tty* 
 # port = input("Enter port name which lidar is connected:") #windows
 #port = "/dev/ttyUSB0" #linux
-port = "com9"
+port = "com13"
 Obj = PyLidar3.YdLidarX4(port) #PyLidar3.your_version_of_lidar(port,chunk_size) 
 # file_path = r"C:\LiDAR-data-processing\ydlidar-X4\ydlidar_data.txt"
 
+#obj2 = PyLidar3. YdLidarG4(port)
+
+
 if(Obj.Connect()):
+    print(Obj. GetCurrentFrequency())
     print(Obj.GetDeviceInfo())
     gen = Obj.StartScanning()
     t = time.time() # start time 
@@ -20,6 +24,7 @@ if(Obj.Connect()):
         final_data = {"timestamp":time_stamp}
         final_data.update(next(gen))
         print(f"{final_data}\n")
+        break
         time.sleep(0.5)
     Obj.StopScanning()
     Obj.Disconnect()
