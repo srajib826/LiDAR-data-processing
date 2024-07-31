@@ -5,7 +5,7 @@ import datetime # Time module
 port = "com9" #windows
 
 Obj = PyLidar3.YdLidarX4(port) #PyLidar3.your_version_of_lidar(port,chunk_size) 
-file_path = r"C:\LiDAR-data-processing\ydlidar-X4\ydlidar_data_trunk3_gnt=4.txt"
+file_path = r"C:\LiDAR-data-processing\ydlidar-X4\trunk_data_height2.txt"
 # gn_t = 1.46 m, gn_t = 4.03
 
 if(Obj.Connect()):
