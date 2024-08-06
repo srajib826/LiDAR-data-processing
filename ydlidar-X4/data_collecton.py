@@ -3,18 +3,20 @@ import time
 import datetime 
 import sys
 
-port = "com13" #windows
+port = "/dev/ttyUSB0" 
 
-Obj = PyLidar3.YdLidarX4(port) #PyLidar3.your_version_of_lidar(port,chunk_size) 
-file_path = r"C:\Users\Rajib\LiDAR-data-processing\ydlidar-X4\test_data.txt"
+Obj = PyLidar3.YdLidarX4(port) #PyLidar3.your_version_of_lidar(port,chunk_size)
+start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+print(f"Stat Time :{start_time}")
+file_path = f"/home/rajib/LiDAR-data-processing/ydlidar-X4/{start_time}.txt"
 # gn_t = 1.46 m, gn_t = 4.03
 
 # give input in min.
 capture_time = 0
-if len(sys.argv[1]) > 0:
+if len(sys.argv) > 1:
     capture_time = int(sys.argv[1])*60
 else :
-    capture_time = 10*60
+    capture_time = 10*60   # default time is 10 min.
 
 print(capture_time)
 
@@ -33,6 +35,8 @@ if(Obj.Connect()):
             time.sleep(0.5)
     Obj.StopScanning()
     Obj.Disconnect()
+    end_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"End Time :{end_time}")
     print("Done\n")
 else:
     print("Error connecting to device")
